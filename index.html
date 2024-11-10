@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💩記録アプリ</title>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #image {
+            border-radius: 50% 20% / 10% 40%;
+        }
+
+
+        form {
+            display: inline-block;
+            text-align: left;
+            width: 150px;
+        }
+
+        .entry {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px;
+            width: 200px;
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <header>
+        <h2>わんこの💩記録アプリ💩</h2>
+        <img id="image" src="./js/ginga.jpeg" alt="" width="125" height="125">
+
+    </header>
+
+    <main>
+        <div>
+            <form>
+                <label for="date">日付</label>:<input id="date" name="date" type="date"><br>
+                <label for="time">時間</label>:<input type="time" name="time" id="time"><br>
+                <select name="poo">
+                    <option value="poo_1">💩（1回）</option>
+                    <option value="poo_2">💩💩（2回）</option>
+                    <option value="poo_3">💩💩💩…（3回以上！）</option>
+                    <option value="poo_0">してない</option>
+                </select><br>
+                <textarea id="text" placeholder="メモ"></textarea><br>
+                <input type="button" id="save" value="登録">
+
+            </form>
+        </div>
+
+        <div id="list">
+            <!-- ここに追加データが挿入される -->
+        </div>
+
+
+    </main>
+
+    <footer>
+        Satoko
+    </footer>
+
+    <!-- 以下にjsを書いていきます -->
+    <script>
+
+        //1.Save クリックイベント
+        $("#save").on("click", function () {
+
+            const date = $("#date").val();
+            const time = $("#time").val();
+            const poo = $("select[name='poo']").val();
+            const text = $("#text").val();
+
+            const data = `${date}_${time}`; // 日付と時間を組み合わせてデータキーを作成
+
+            const entry = {
+                date: date,
+                time: time,
+                poo: poo,
+                text: text
+
+            };
+
+            const entryString = JSON.stringify(entry); // エントリー情報を文字列に変換
+
+            const html = `
+
+        <div class="entry">
+        <p>date: ${date} </p> 
+        <p>time :${time} </p> 
+        <p>poo :${poo} </p> 
+        <p>text :${text} </p>                
+        </div>
+
+      `;
+            $("#list").append(html);
+
+
+
+            //2.ローカルストレージにデータ保存
+            localStorage.setItem(data, entryString);
+        });
+
+
+        //3.ページ読み込み：保存データ取得表示
+
+
+        for (const key in localStorage) {
+            if (localStorage.hasOwnProperty(key)) {
+                const entryString = localStorage.getItem(key);
+                const entry = JSON.parse(entryString);
+
+                const html = `
+            <div class="entry">
+                <p>date: ${entry.date} </p>
+                <p>time: ${entry.time} </p>
+                <p>poo: ${entry.poo} </p>
+                <p>text: ${entry.text} </p>
+            </div>
+        `;
+
+                $("#list").append(html);
+
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
