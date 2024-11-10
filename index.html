@@ -8,6 +8,12 @@
     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 
     <style>
+        header {
+            width: 100%;
+            background-color: #89c7de;
+        }
+
+
         body {
             text-align: center;
         }
@@ -21,6 +27,7 @@
             display: inline-block;
             text-align: left;
             width: 150px;
+
         }
 
         .entry {
@@ -29,7 +36,21 @@
             padding: 5px;
             margin: 5px;
             width: 200px;
+            background-color: #f6f4f4;
 
+        }
+
+        footer {
+            width: 100%;
+            background-color: #89c7de;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+
+            position: absolute;
+            /*←絶対位置*/
+            bottom: 0;
+            /*下に固定*/
         }
     </style>
 
@@ -39,20 +60,23 @@
 <body>
     <header>
         <h2>わんこの💩記録アプリ💩</h2>
-        <img id="image" src="./js/ginga.jpeg" alt="" width="125" height="125">
+
 
     </header>
 
     <main>
+        <img id="image" src="./js/ginga.jpeg" alt="" width="125" height="125">
+
+
         <div>
             <form>
                 <label for="date">日付</label>:<input id="date" name="date" type="date"><br>
                 <label for="time">時間</label>:<input type="time" name="time" id="time"><br>
                 <select name="poo">
-                    <option value="poo_1">💩（1回）</option>
-                    <option value="poo_2">💩💩（2回）</option>
-                    <option value="poo_3">💩💩💩…（3回以上！）</option>
-                    <option value="poo_0">してない</option>
+                    <option value="1">💩（1回）</option>
+                    <option value="2">💩💩（2回）</option>
+                    <option value="3">💩💩💩…（3回以上！）</option>
+                    <option value="0">してない</option>
                 </select><br>
                 <textarea id="text" placeholder="メモ"></textarea><br>
                 <input type="button" id="save" value="登録">
