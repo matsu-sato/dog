@@ -41,8 +41,9 @@
         }
 
         #clear {
-
+            color: #ccc;
             width: 100px;
+            background-color: rgb(56, 58, 58);
 
         }
 
@@ -81,11 +82,11 @@
                 <select name="poo">
                     <option value="1">💩（1回）</option>
                     <option value="2">💩💩（2回）</option>
-                    <option value="3">💩💩💩…（3回以上！）</option>
+                    <option value="3~">💩💩💩…（3回以上！）</option>
                     <option value="0">してない</option>
                 </select><br>
                 <textarea id="text" placeholder="メモ"></textarea><br>
-                <input type="button" id="save" value="登録">
+                <input type="button" id="save" value="データ登録">
 
             </form>
         </div>
@@ -94,7 +95,7 @@
             <!-- ここに追加データが挿入される -->
         </div>
 
-        <button id="clear">全て削除</button>
+        <button id="clear">すべて削除</button>
 
 
     </main>
@@ -146,8 +147,6 @@
 
 
         //3.ページ読み込み：保存データ取得表示
-
-
         for (const key in localStorage) {
             if (localStorage.hasOwnProperty(key)) {
                 const entryString = localStorage.getItem(key);
@@ -167,7 +166,7 @@
             }
         }
 
-        //ローカルストレージのデータを消去
+        //4.ローカルストレージのデータを消去
 
         $("#clear").on("click", function () {
             localStorage.clear();
